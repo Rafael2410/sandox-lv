@@ -6,6 +6,8 @@ use Egulias\EmailValidator\Exception\ConsecutiveAt;
 use Illuminate\Http\Request;
 use App\Http\Requests\ContactsRequest;
 use App\Models\Contacts;
+use PhpParser\Node\Const_;
+use PHPUnit\TextUI\XmlConfiguration\Constant;
 
 class ContactsController extends Controller {
 
@@ -52,4 +54,38 @@ class ContactsController extends Controller {
         return view('detail-message', ['data' => $contact->find($id)] );
     }
 
+    public function updateData($id)
+    {
+        $contact = new Contacts();
+
+        return view('update-message', [ 'data' => $contact->find($id)] );
+    }
+
+    public function updateDataSubmit($id, ContactsRequest $params)
+    {
+        $contact = new Contacts();
+
+        $feedback = $contact->find($id);
+
+        $feedback->name = $params->input('name');
+        $feedback->email = $params->input('email');
+        $feedback -> subject = $params->input('subject');
+        $feedback -> message = $params->input('message');
+
+        $feedback->save();
+
+        return redirect()->route('contact-data-detail',$id)->with('success', 'Сообщение было обновлено');
+
+    }
+
+    public function deleteData($id)
+    {
+
+        $contact = new Contacts;
+
+        $contact->find($id)->delete();
+
+        return redirect()->route('contacts-data')->with('success', 'Сообщение было удалено');
+
+    }
 }

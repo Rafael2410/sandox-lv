@@ -33,6 +33,18 @@ Route::get('/contacts/all/{id}',[
     ContactsController::class,'getOneData'
 ])->name('contact-data-detail');
 
+Route::get('/contacts/all/{id}/update',[
+    ContactsController::class,'updateData'
+])->name('contact-data-update');
+
+Route::post('/contacts/all/{id}/update',[
+    ContactsController::class,'updateDataSubmit'
+])->name('contact-update-submit');
+
+Route::get('/contacts/all/{id}/delete',[
+    ContactsController::class,'deleteData'
+])->name('contact-data-delete');
+
 Route::post('/contacts/submit', [
     ContactsController::class,'submit']
 )->name('contacts-form');
