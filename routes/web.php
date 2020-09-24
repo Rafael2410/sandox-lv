@@ -25,5 +25,14 @@ Route::get('/contacts', function () {
     return view('contacts');
 })->name('contacts');
 
-Route::get('/contacts/all',[ContactsController::class,'getAllDate'])->name('contacts-data');
-Route::post('/contacts/submit', [ContactsController::class,'submit'])->name('contacts-form');
+Route::get('/contacts/all', [
+    ContactsController::class,'getAllData'
+])->name('contacts-data');
+
+Route::get('/contacts/all/{id}',[
+    ContactsController::class,'getOneData'
+])->name('contact-data-detail');
+
+Route::post('/contacts/submit', [
+    ContactsController::class,'submit']
+)->name('contacts-form');

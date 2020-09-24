@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Egulias\EmailValidator\Exception\ConsecutiveAt;
 use Illuminate\Http\Request;
 use App\Http\Requests\ContactsRequest;
 use App\Models\Contacts;
@@ -23,7 +24,7 @@ class ContactsController extends Controller {
         return redirect()->route('index')->with('success', 'Сообщение было добавлено');
     }
 
-    public function getAllDate()
+    public function getAllData()
     {
         $contacts = new Contacts();
         // $contacts->orderBy('id','desc')->skip(1)->take(2)->get()
@@ -43,6 +44,12 @@ class ContactsController extends Controller {
         $data = $contact->where('id', '=', '1')->get();                   // выборка с условием
         */
         return view('messages', [ 'data' => $contacts->where('subject','<>','')->get()]);
+    }
+
+    public function getOneData($id)
+    {
+        $contact = new Contacts();
+        return view('detail-message', ['data' => $contact->find($id)] );
     }
 
 }

@@ -11,7 +11,7 @@
             <h3>{{ $item->subject }}</h3>
             <p>{{ $item->email }}</p>
             <p><small>{{ $item->created_at }}</small></p>
-            <a href="#"><button class="btn btn-warning">Подробнее</button></a>
+            <a href="{{ route('contact-data-detail', $item->id) }}"><button class="btn btn-warning">Подробнее</button></a>
         </div>
     @endforeach
 @endsection
