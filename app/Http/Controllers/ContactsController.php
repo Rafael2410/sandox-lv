@@ -23,4 +23,26 @@ class ContactsController extends Controller {
         return redirect()->route('index')->with('success', 'Сообщение было добавлено');
     }
 
+    public function getAllDate()
+    {
+        $contacts = new Contacts();
+        // $contacts->orderBy('id','desc')->skip(1)->take(2)->get()
+        /*
+        Шпаргалка по запросам:
+        ----------------------
+        $contact = new Contact;
+        $data = [];
+
+        $data = $contact->all();                                          // все записи
+        $data[] = $contact->find(1);                                      // поиск по ID=1
+        $data[] = $contact->inRandomOrder()->first();                     // первая случайная запись
+        $data = $contact->inRandomOrder()->get();                         // все случайные записи
+        $data = $contact->orderBy('id', 'asc')->get();                    // выборка с сортировкой
+        $data = $contact->orderBy('id', 'asc')->take(1)->get();           // выборка 1 записи с сортировкой
+        $data = $contact->orderBy('id', 'asc')->skip(1)->take(1)->get();  // пропускаем 1 запись, выборка 1 записи с сортировкой
+        $data = $contact->where('id', '=', '1')->get();                   // выборка с условием
+        */
+        return view('messages', [ 'data' => $contacts->where('subject','<>','')->get()]);
+    }
+
 }
